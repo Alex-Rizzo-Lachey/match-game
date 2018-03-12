@@ -34,6 +34,23 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+
+}
+
+#start-game {
+  height: 25rem;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#start-game button {
+  color: white;
+  font-size: 3rem;
+  background-color: rgb(32, 64, 86);
+  height: 10rem;
+  width: 15rem;
+  border-radius: 8px;
 }
 /*
 .card:hover {

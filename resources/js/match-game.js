@@ -1,21 +1,40 @@
-var MatchGame = {};
+var MatchGame = {
+  matches : [],
+  boardSize : [9]
+};
 
 /*
   Sets up a new game after HTML document has loaded.
   Renders a 4x4 board of cards.
 */
 $(document).ready(function() {
-  var $game = $('#game');
-  var values = MatchGame.generateCardValues();
-  MatchGame.renderCards(values, $game);
+  MatchGame.startGame();
 });
+
+/*
+  starts new game and hides pop-up
+*/
+MatchGame.startGame = function() {
+  $('.start-game').click(function () {
+    $('#start-game').toggleClass("show");
+    var $game = $('#game');
+    var values = MatchGame.generateCardValues(MatchGame.boardSize[0]);
+    MatchGame.renderCards(values, $game);
+
+  });
+
+};
+
+
+
+
 /*
   Generates and returns an array of matching card values.
  */
 
-MatchGame.generateCardValues = function () {
+MatchGame.generateCardValues = function(boardSize) {
   var orderedArr = [];
-  for (i = 1; i < 9; i++) {
+  for (i = 1; i < boardSize; i++) {
     orderedArr.push(i);
     orderedArr.push(i);
   }
@@ -97,8 +116,16 @@ MatchGame.flipCard = function($card, $game) {
   var flippedCards = $game.data('flippedCards');
   flippedCards.push($card);
 
+
   if (flippedCards.length === 2) {
     if (flippedCards[0].data('value') === flippedCards[1].data('value')) {
+
+      var matches = MatchGame.matches;
+      var $score = $('#score');
+      matches.push($card);
+      $score.text('SCORE: ' + matches.length);
+
+
       var matchCss = {
         backgroundColor : 'rgb(153, 153, 153)',
         color: 'rgb(204, 204, 204)'
