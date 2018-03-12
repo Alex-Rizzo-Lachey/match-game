@@ -1,5 +1,3 @@
-
-
 var MatchGame = {};
 
 /*
@@ -20,7 +18,7 @@ MatchGame.generateCardValues = function () {
   for (i = 1; i < 9; i++) {
     orderedArr.push(i);
     orderedArr.push(i);
-  };
+  }
 
   var randomArr = [];
   while (orderedArr.length > 0) {
@@ -64,6 +62,18 @@ MatchGame.renderCards = function(cardValues, $game) {
     $cardElement.data(data);
     $game.append($cardElement);
   }
+
+
+  /* changes color on hover
+    $('.card').hover(function() {
+      $(this).css("background-color", "rgb(50, 80, 100)");
+    }, function() {
+      $(this).css("background-color", "rgb(32, 64, 86)");
+    });
+  */
+
+
+
   $('.card').click(function() {
     MatchGame.flipCard($(this), $('#game'));
   });
@@ -79,11 +89,12 @@ MatchGame.flipCard = function($card, $game) {
   if ($card.data('flipped')) {
     return;
   }
+
   $card.css('background-color', $card.data('color'));
   $card.text($card.data('value'));
   $card.data('flipped', true);
 
-  var flippedCards = $game.data('flippedCards')
+  var flippedCards = $game.data('flippedCards');
   flippedCards.push($card);
 
   if (flippedCards.length === 2) {
@@ -102,7 +113,7 @@ MatchGame.flipCard = function($card, $game) {
       flippedCards[1].text('');
       flippedCards[0].data('flipped', false);
       flippedCards[1].data('flipped', false);
-    }, 350); 
+    }, 350);
     }
     $game.data('flippedCards', []);
   }
