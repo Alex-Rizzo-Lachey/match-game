@@ -1,6 +1,7 @@
 var MatchGame = {
+  turns : 0,
   matches : [],
-  boardSize : [9]
+  boardSize : undefined
 };
 
 /*
@@ -11,15 +12,40 @@ $(document).ready(function() {
   MatchGame.startGame();
 });
 
+
+
 /*
   starts new game and hides pop-up
 */
+
 MatchGame.startGame = function() {
-  $('.start-game').click(function () {
-    $('#start-game').toggleClass("show");
-    var $game = $('#game');
-    var values = MatchGame.generateCardValues(MatchGame.boardSize[0]);
-    MatchGame.renderCards(values, $game);
+  $('.4x3').click(function () {
+    $('#start-game').fadeOut("slow", function() {
+      var $game = $('#game');
+      MatchGame.boardSize = 7
+      var values = MatchGame.generateCardValues(MatchGame.boardSize);
+      MatchGame.renderCards(values, $game);
+    });
+
+  });
+
+  $('.4x4').click(function () {
+    $('#start-game').fadeOut("slow", function() {
+      var $game = $('#game');
+      MatchGame.boardSize = 9
+      var values = MatchGame.generateCardValues(MatchGame.boardSize);
+      MatchGame.renderCards(values, $game);
+    });
+
+  });
+
+  $('.4x5').click(function () {
+    $('#start-game').fadeOut("slow", function() {
+      var $game = $('#game');
+      MatchGame.boardSize = 11
+      var values = MatchGame.generateCardValues(MatchGame.boardSize);
+      MatchGame.renderCards(values, $game);
+    });
 
   });
 
@@ -65,7 +91,7 @@ MatchGame.renderCards = function(cardValues, $game) {
     'hsl(310, 85%, 65%)',
     'hsl(360, 85%, 65%)'];
 
-  $game.empty();
+
   $game.data('flippedCards', []);
 
   for (i = 0; i < cardValues.length; i++) {
@@ -80,6 +106,7 @@ MatchGame.renderCards = function(cardValues, $game) {
     var $cardElement = $('<div class= "col-xs-3 card"></div>');
     $cardElement.data(data);
     $game.append($cardElement);
+
   }
 
 
@@ -118,13 +145,15 @@ MatchGame.flipCard = function($card, $game) {
 
 
   if (flippedCards.length === 2) {
+
+    var $turns = $('#turns');
+    ++MatchGame.turns;
+    $turns.text('TURNS: ' + MatchGame.turns);
+
     if (flippedCards[0].data('value') === flippedCards[1].data('value')) {
 
       var matches = MatchGame.matches;
-      var $score = $('#score');
       matches.push($card);
-      $score.text('SCORE: ' + matches.length);
-
 
       var matchCss = {
         backgroundColor : 'rgb(153, 153, 153)',
@@ -143,7 +172,21 @@ MatchGame.flipCard = function($card, $game) {
     }, 350);
     }
     $game.data('flippedCards', []);
+
+    if (MatchGame.matches.length === MatchGame.boardSize - 1) {
+      MatchGame.displayWin();
+    }
+
   }
+
+  /*
+  displays win pop-up
+  */
+
+  MatchGame.displayWin = function() {
+      $('.win-container').fadeIn("slow");
+
+  };
 
 
 

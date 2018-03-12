@@ -13,13 +13,13 @@
   <link rel="stylesheet" type="text/css" href="./resources/styles/style.css">
 </head>
 <body>
-  <!-- win pop-up
-  <div class="win-container">
+  <!-- win pop-up-->
+  <div class="win-container hide">
     <div>
       <h1>You win!</h1>
       <h2>refresh the page to restart<h2>
     </div>
-  </div> -->
+  </div>
   <!-- rules -->
   <div class="container">
     <div class="row">
@@ -27,12 +27,14 @@
         <h1>Match Game</h1>
         <h2>Rules</h2>
         <p>Click on a card to reveal the number on the other side. Click on a second card to try and find a match to the first. If you succeed, the pair will be removed from play. If not, try again!</p>
-        <h1 id="score">SCORE: 0</h1>
+        <h1 id="turns">TURNS: 0</h1>
       </div>
       <!-- games tiles -->
       <div class="col col-lg-9" id="game">
         <div class="row" id="start-game">
-          <button class="start-game">START GAME</button>
+          <button class="4x3">4 x 3</button>
+          <button class="4x4">4 x 4</button>
+          <button class="4x5">4 x 5</button>
         </div>
       </div>
     </div>

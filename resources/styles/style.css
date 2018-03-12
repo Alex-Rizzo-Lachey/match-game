@@ -48,10 +48,12 @@ h2 {
   color: white;
   font-size: 3rem;
   background-color: rgb(32, 64, 86);
+  margin: 2rem;
   height: 10rem;
   width: 15rem;
   border-radius: 8px;
 }
+
 /*
 .card:hover {
   background-color: rgb(50, 80, 100);
